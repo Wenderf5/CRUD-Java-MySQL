@@ -1,11 +1,10 @@
-package com.app.cadastroDeAlunos.services;
+package com.app.escola.services;
 
-import com.app.cadastroDeAlunos.config.DataBaseConfig;
-
+import com.app.escola.config.DataBaseConfig;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class cadastro_aluno_service {
+public  class CadastroAlunoService {
     public String cadastroAluno(String nome, String cpf){
         try {
             PreparedStatement stmt = DataBaseConfig.conexao.prepareStatement("INSERT INTO alunos (cpf, nome) VALUES (?, ?)");

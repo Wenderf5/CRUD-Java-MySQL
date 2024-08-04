@@ -1,4 +1,4 @@
-package com.app.cadastroDeAlunos.config;
+package com.app.escola.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ public class DataBaseConfig {
     public void connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/nomedobanco", "user", "password");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/dataBaseName", "user", "password");
         } catch (ClassNotFoundException ex) {
             System.out.println("Driver do banco de dados não encontrado.");
         } catch (SQLException ex) {

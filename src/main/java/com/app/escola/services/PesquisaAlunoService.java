@@ -1,28 +1,20 @@
-package com.app.cadastroDeAlunos.controllers;
+package com.app.escola.services;
 
-import com.app.cadastroDeAlunos.Main;
-import com.app.cadastroDeAlunos.config.DataBaseConfig;
+import com.app.escola.config.DataBaseConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@RestController
-public class pesquisar_aluno_controller {
+public class PesquisaAlunoService {
 
-    @PostMapping("/pesquisaraluno")
-    public String pesquisarAluno(@RequestBody Main.pesquisaaluno aluno){
+    public String pesquisaAluno(String aluno){
         try{
-            //Query de consulta no banco de dados
             PreparedStatement stmt = DataBaseConfig.conexao.prepareStatement("SELECT * FROM alunoscursos WHERE nomeAluno = ? ");
-            ((PreparedStatement) stmt).setString(1, aluno.getNome());
+            ((PreparedStatement) stmt).setString(1, aluno);
             ResultSet rs = stmt.executeQuery();
 
             ObjectMapper objectMapper = new ObjectMapper();
