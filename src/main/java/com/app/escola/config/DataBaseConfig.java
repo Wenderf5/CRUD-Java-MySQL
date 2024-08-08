@@ -9,11 +9,12 @@ public class DataBaseConfig {
     public void connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/dataBaseName", "user", "password");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/DataBaseName", "user", "password");
+            System.out.println("Conexão com banco de dados estabelecida com sucesso!");
         } catch (ClassNotFoundException ex) {
             System.out.println("Driver do banco de dados não encontrado.");
         } catch (SQLException ex) {
-            System.out.println("Erro ao conectar com o banco de dados.");
+            System.out.println("Erro ao conectar com o banco de dados." + " " + ex);
         }
     }
 }

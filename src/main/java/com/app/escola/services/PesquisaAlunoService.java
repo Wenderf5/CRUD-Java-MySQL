@@ -13,7 +13,7 @@ public class PesquisaAlunoService {
 
     public String pesquisaAluno(String aluno){
         try{
-            PreparedStatement stmt = DataBaseConfig.conexao.prepareStatement("SELECT * FROM alunoscursos WHERE nomeAluno = ? ");
+            PreparedStatement stmt = DataBaseConfig.conexao.prepareStatement("SELECT * FROM alunoscurso WHERE nomeAluno = ? ");
             ((PreparedStatement) stmt).setString(1, aluno);
             ResultSet rs = stmt.executeQuery();
 
