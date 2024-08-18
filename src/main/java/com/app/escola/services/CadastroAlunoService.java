@@ -1,20 +1,26 @@
 package com.app.escola.services;
 
-import com.app.escola.config.DataBaseConfig;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.app.escola.respository.AlunoRepository;
+import com.app.escola.entitys.Alunos;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public  class CadastroAlunoService {
-    public String cadastroAluno(String nome, String cpf){
+@Service
+public class CadastroAlunoService {
+    private AlunoRepository alunoRepository;
+
+    @Autowired
+    public CadastroAlunoService(AlunoRepository alunoRepository) {
+        this.alunoRepository = alunoRepository;
+    }
+
+    public String cadastroAluno(String nome, String cpf) {
         try {
-            PreparedStatement stmt = DataBaseConfig.conexao.prepareStatement("INSERT INTO alunos (cpf, nome) VALUES (?, ?)");
-            ((PreparedStatement) stmt).setString(1, cpf);
-            stmt.setString(2, nome);
-            stmt.executeUpdate();
+            Alunos aluno = new Alunos(cpf, nome);
+            alunoRepository.save(aluno);
             return "Aluno cadastrado com sucesso!";
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return "Erro ao cadastrar aluno: " + ex.getMessage();
+        } catch (Exception e) {
+            return "Erro ao cadastrar aluno." + " " + e;
         }
     }
 }
