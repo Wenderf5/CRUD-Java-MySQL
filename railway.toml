@@ -1,0 +1,5 @@
+[build]
+command = "mvn clean package"
+
+[deploy]
+command = "java -jar target/cadastroDeAlunos.jar"
