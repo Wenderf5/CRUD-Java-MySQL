@@ -1,4 +1,4 @@
-package com.app.escola.data_base.entitys.course_student_entity;
+package com.app.escola.data_base.entitys.coursestudent_entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,21 +6,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Course_student {
+public class Coursestudent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long id_course;
-    private Long id_student;
+    private Long idcourse;
+    private Long idstudent;
 
     //Construtor padrão sem argumentos
-    public Course_student() {
+    public Coursestudent() {
 
     }
 
-    public Course_student(Long id_course, Long id_student){
-        this.id_course = id_course;
-        this.id_student = id_student;
+    public Coursestudent(Long idcourse, Long idstudent){
+        this.idcourse = idcourse;
+        this.idstudent = idstudent;
     }
 
     //Geters
@@ -29,10 +29,10 @@ public class Course_student {
     }
 
     public Long getId_course() {
-        return id_course;
+        return idcourse;
     }
 
     public Long getId_student() {
-        return id_student;
+        return idstudent;
     }
 }

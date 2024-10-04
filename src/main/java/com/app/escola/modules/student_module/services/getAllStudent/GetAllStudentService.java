@@ -2,8 +2,8 @@ package com.app.escola.modules.student_module.services.getAllStudent;
 
 import com.app.escola.data_base.entitys.student_entity.Student;
 import com.app.escola.data_base.entitys.student_entity.StudentRepository;
-import com.app.escola.data_base.entitys.course_student_entity.Course_student;
-import com.app.escola.data_base.entitys.course_student_entity.Course_studentRepository;
+import com.app.escola.data_base.entitys.coursestudent_entity.Coursestudent;
+import com.app.escola.data_base.entitys.coursestudent_entity.CoursestudentRepository;
 import com.app.escola.data_base.entitys.course_entity.Course;
 import com.app.escola.data_base.entitys.course_entity.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +18,13 @@ import java.util.List;
 public class GetAllStudentService {
     private StudentRepository studentRepository;
     private CourseRepository courseRepository;
-    private Course_studentRepository course_studentRepository;
+    private CoursestudentRepository course_studentRepository;
 
     @Autowired
     public GetAllStudentService(
             StudentRepository studentRepository,
             CourseRepository courseRepository,
-            Course_studentRepository course_studentRepository
+            CoursestudentRepository course_studentRepository
     ) {
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
@@ -35,7 +35,7 @@ public class GetAllStudentService {
         try {
             List<Student> students = studentRepository.findAll();
             List<Course> courses = courseRepository.findAll();
-            List<Course_student> coursesStudents = course_studentRepository.findAll();
+            List<Coursestudent> coursesStudents = course_studentRepository.findAll();
 
             List<Students> listStudent = new ArrayList<Students>();
 
@@ -44,11 +44,11 @@ public class GetAllStudentService {
             }
 
             for (Students student : listStudent) {
-                for (Course_student courseStudent : coursesStudents) {
+                for (Coursestudent courseStudent : coursesStudents) {
                     if (courseStudent.getId_student() == student.id) {
                         for (Course course : courses) {
                             if (course.getId() == courseStudent.getId_course()) {
-                                student.setCourses(new Courses(course.getId(), course.getName()));
+                                student.setCourses(new Courses(courseStudent.getId(), course.getId(), course.getName()));
                             }
                         }
                     }
@@ -97,16 +97,22 @@ public class GetAllStudentService {
 
     public class Courses {
         private Long id;
+        private Long idCourse;
         private String name;
 
-        public Courses(Long id, String name) {
+        public Courses(Long id, Long idCourse, String name) {
             this.id = id;
+            this.idCourse = idCourse;
             this.name = name;
         }
 
         //Geters
         public Long getId() {
             return id;
+        }
+
+        public Long getIdCourse() {
+            return idCourse;
         }
 
         public String getName() {
